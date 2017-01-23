@@ -313,5 +313,5 @@ Out[65]:
     return peptide
 
 
->>> translateAA(A1DNA)
+>>> translateAA(A1DNA) #Apply translate function
 Out[111]: 'KSYRAHTPNMLVKPLPLLINPYAISIIISSLALGTITTLSSYH'
