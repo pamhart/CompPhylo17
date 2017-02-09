@@ -77,7 +77,21 @@ def hillclimb(n,k,p,d):														#Diego and I designed the backbone of this 
                 break
             return(pCurr)
 
-            	
 
- 
+import random 
+
+def lrc(n,k,p):												#Not working, I believe there's an issue in previous code
+    d=0.1
+    mltrue=hillclimb(n,k,p,d)
+    random_k=[random.randint(1,n-1) for i in range (100)]
+    maxlikeli=[]
+    for i in random_k:
+        d=0.1
+        maxlikeli=hillclimb(n,random_k,p,d)
+        MLindex=tuple(maxlikeli)
+        print(MLindex)
+    for i in MLindex:
+        lr=MLindex/mltrue
+        print(lr,maxlikeli,random_k,p)
+        
 		
