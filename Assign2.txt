@@ -33,7 +33,7 @@ def pmf(n,k,p):									#Function for calculating the probability mass function 
 import random
 
 events=['win','loss','draw','bigfatnope']
-probs=['0.1','0.2','0.3','0.4'
+probs=['0.1','0.2','0.3','0.4']
     
 def samp_disc_dist(events,probs):
     events=['win','loss','draw','bigfatnope']
