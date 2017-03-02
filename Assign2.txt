@@ -95,3 +95,49 @@ def lrc(n,k,p):												#Not working, I believe there's an issue in previous 
         print(lr,maxlikeli,random_k,p)
         
 		
+		
+#THE FOLLOWING IS WORKING		
+		
+		
+		
+		
+		
+from math import factorial as fac
+
+
+def binomial(n,k):
+    try:
+        binom = fac(n) // fac(k) // fac(n - k)
+    except ValueError:
+        binom = 0
+    return binom
+    
+def bincoef(n,k):
+    return 1 if k==0 else (0 if n==0 else binomial(n-1, k) + binomial(n-1, k-1))
+    
+    
+def pmf(n,k,p):									#Function for calculating the probability mass function when given n trials of k sets with p probability. Binomial distribution is (n,p). 
+    pmf=bincoef(n,k)*pow(p,k)*pow(1-p,n-k)		#PMF = P(X=k) = (n choose k)p^k(1-p)^n-k. Reads: The probability of # of successes (k) with a binomial distribution of (n,p) is ...
+    return (pmf)								#Return the value of pmf
+    
+def hillclimb (n,k,p):
+    diff=0.1
+    pCurr=p
+    while (diff>0.001):
+        likelipCurr=pmf(n,k,pCurr)
+        likelipUp=pmf(n,k,pCurr+diff)
+        likelipDown=pmf(n,k,pCurr-diff)
+        while (likelipUp>likelipCurr):
+            pCurr=pCurr+diff
+            likelipCurr=pmf(n,k,pCurr)
+            likelipUp=pmf(n,k,pCurr+diff)
+            likelipDown=pmf(n,k,pCurr-diff)
+        while (likelipDown>likelipCurr):
+            pCurr=pCurr-diff
+            likelipCurr=pmf(n,k,pCurr)
+            likelipUp=pmf(n,k,pCurr+diff)
+            likelipDown=pmf(n,k,pCurr-diff)
+        diff=diff/2
+    return pCurr
+    return likelipCurr
+    print ("The likelihood of pCurr is",likelipCurr,"and the pCurr is",pCurr)

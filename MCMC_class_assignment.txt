@@ -1,0 +1,18 @@
+MCMC class assignment
+def draw_proposal(pCurr):																								#Drawing from a proposal distribution
+    numValues=1																										#Not sure why this needs defining
+    uniScale=1																										#
+    param_val = uniform.rvs(size=numValues,loc=pCurr,scale=uniScale)  	#scale = standard deviation; loc = mean, we want it centered on p cause we're drawing p; here, the param_vals are being drawn from the uniform (random var = rvs) 
+    params.append(param_val)											#Putting the param_vals into the params list above
+    return param_val
+    print ("From the proposal distribution, the paramater values are",param_vals)
+
+class MChain(object):
+    """
+    This is our Markov chain class
+    """
+    def __init__(self,tMat,):
+        self.
+        self.tMat
+        
+    def run(self)

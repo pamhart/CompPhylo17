@@ -27,36 +27,58 @@ def posterior(n,k,p):
     posterior=prior(p)*likelihood(n,k,p)
     return posterior
     
-estimates=[]
-priors=[]
-likelihoods=[]
-posteriors=[]
+from scipy.stats import binom, uniform
+from random import random, gauss
+import numpy as np
+import matplotlib.pyplot as plt
+
+def likelihood(n,k,p,testingPrior=False):
+    if testingPrior:                        #If testingPrior=True, this will return a 1. If this works correctly, the posterior should be equal to the prior
+        return 1
+    if p < 0:                               #If the probability is less than 0 (which is impossible), then return 0 to indicate that there is an error
+        return 0
+    elif p > 1:                             #If the probability is greater than 1 (which is also impossible), then return 0 to indicate that there is an error
+        return 0
+    else:
+        return binom.pmf(n,k,p)
+
+def prior(p):                               
+    return uniform.pdf(p)
+
+def posterior(n,k,p):
+    posterior=prior(p)*likelihood(n,k,p)
+    return posterior
+    
 params=[]
 
-def draw_proposal(n,k):																								#Drawing from a proposal distribution
+def draw_proposal(p):																								#Drawing from a proposal distribution
     numValues=1																										#Not sure why this needs defining
     uniScale=1																										#
-    param_vals = uniform.rvs(size=numValues,loc=0.5,scale=uniScale)  	#scale = standard deviation; loc = mean; here, the param_vals are being drawn from the uniform (random var = rvs) 
-    params.append(param_vals)											#Putting the param_vals into the params list above
-    return param_vals
+    param_val = uniform.rvs(size=numValues,loc=p,scale=uniScale)  	#scale = standard deviation; loc = mean, we want it centered on p cause we're drawing p; here, the param_vals are being drawn from the uniform (random var = rvs) 
+    params.append(param_val)											#Putting the param_vals into the params list above
+    return param_val
     print ("From the proposal distribution, the paramater values are",param_vals)
     
-def MCMC(n,k,p,reps):
-    for i in range:
-        param_val = uniform.rvs(size=numValues,loc=0.5,scale=uniScale)  #Defining the param_val from the uniform distribution to be the pNew
-        pNew=param_val 													#trying to get the pNew to be from the proposal distribution											
-        r=posterior(n,k,pNew)/posterior(n,k,p)							#Ratio is posterior density of new over posterior density of old
-        if r > 1: 														#If the ratio is greater than 1 change the p to pNew
-            p=pNew
-        elif r < 1:														#If the ratio is less than one, make a random choice between 0 and 1
-            rand = random.choice(0, 1)
-        if rand < r:													#If the random choice is less than the ratio, change p to pNew
-            p=pNew
-        elif rand > r: 													#If the random choice is greater than the ratio, keep p the same
-            p=p
-        else:
-            return ("Freaking works")
-  
+pvals=[]
+likeli_pNew_list=[]
+prior_pNew_list=[]
+ratio_list=[]
+
+def MC(n,k,pCurr,reps):
+    for i in range(reps):
+        pNew=draw_proposal(pCurr)
+        prior_pNew=prior(pNew)
+        prior_pNew_list.append(prior_pNew)
+        likeli_pNew=likelihood(n,k,pNew,testingPrior=False)
+        likeli_pNew_list.append(likeli_pNew)
+        calcRatio=posterior(n,k,pNew)/posterior(n,k,pCurr)
+        #ratio=calcRatio(pNew,pCurr)
+        #ratio_list.append(ratio)
+        p=choose([pNew,pCurr],[calcRatio,1-calcRatio])
+        pvals.append(p)
+        return p 
+        
+        
 #I have code that I would use for creating a histogram but I don't have data and I don't know what I would put in anyway. From http://matplotlib.org/1.3.1/users/pyplot_tutorial.html       
 
 n, bins, patches = plt.hist(x, 50, normed=1, facecolor='g', alpha=0.75)	#Include data here
