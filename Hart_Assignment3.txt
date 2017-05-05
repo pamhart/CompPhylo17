@@ -64,6 +64,7 @@ likeli_pNew_list=[]
 prior_pNew_list=[]
 ratio_list=[]
 
+""""NEW""""
 def MC(n,k,pCurr,reps):
     for i in range(reps):
         pNew=draw_proposal(pCurr)

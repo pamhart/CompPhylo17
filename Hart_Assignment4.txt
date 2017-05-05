@@ -1,0 +1,70 @@
+class MChain(object):
+    """
+    This is our Markov chain class. 
+    """
+    def __init__(self,nChains,nSteps,state_space=[],tMatrix=[]):
+        self.nSteps=nSteps			#Number of steps
+        self.nChains=nChains		#Number of chains		
+        self.state_space=state_space		#State space, which is a list
+        self.tMatrix=tMatrix			#Transition matrix
+        self.sample_states=[]	#List of lists for states sampled
+        self.sample_freq=[]
+        
+~~~~~~~~~~~~~~~~~
+        
+    def __init__(self, stateSpace = [], qMat = [], numIter = 50, numChain = 1, simList = [] ):
+        """
+        Initializing variables that are necessary for simulating a discrete-time Markov chain:
+            - state space
+            - Q-matrix (transition matrix)
+            - number of iterations
+            - number of chains
+            - list of simulated states (or list of lists for >1 chain)
+        """
+        self.stateSpace = stateSpace  # state space
+        self.qMat = qMat  # Q-matrix
+        self.numIter = numIter  # number of iterations
+        self.numChain = numChain  # number of chains
+        self.simList = simList  # list of lists to hold simulated chains
+                    
+    def discSamp(self,states=[],probs=[]):
+        """
+        Samples from an arbitrary discrete distribution.
+        States and probs lists must be equal in length. Probs must sum to 1.
+        """
+        r = random.random()
+        cumulProb = 0
+        index = 0
+        for p in probs:
+            cumulProb = cumulProb + p
+            if r < cumulProb:
+                return states[index]
+            index += 1
+        print("ERROR: Probabilities did not add to 1!")
+
+    def run(self,startState=[0]):
+        """
+        Method to simulate the states sampled by a Markov chain.
+        """
+        
+        # Reset chains here to empty list of lists
+        self.simList = []
+        
+        # For loop across chains (we'll simulate chains one at a time)
+        for n in range(numChain):
+            # Initialize this chain to an empty list
+            self.simList.append([])
+            # Add starting state to this chain
+            state = self.stateSpace[0]
+            
+            # For loop across iterations for this chain
+            for it in range(self.numIter):             
+                # Draw the next state using the discSamp function. This function
+                # takes two arguments:
+                #   (1) The list of possible states
+                #   (2) The row of probabilities from the Q-matrix, 
+                #       conditioned on the current state.
+                state = self.discSamp(self.stateSpace, self.qMat[self.stateSpace.index(state)])
+                
+                # Add the new state to this chain.
+                self.simList[n].append(state)

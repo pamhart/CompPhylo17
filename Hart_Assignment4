@@ -1,0 +1,12 @@
+class MChain(object):
+    """
+    This is our Markov chain class. 
+    """
+    def __init__(self,nChains,nSteps,state_space=[],tMatrix=[]):
+        self.nSteps=nSteps			#Number of steps
+        self.nChains=nChains		#Number of chains		
+        self.state_space=state_space		#State space, which is a list
+        self.tMatrix=tMatrix			#Transition matrix
+        self.sample_states=[]	#List of lists for states sampled
+        self.sample_freq=[]
+        
