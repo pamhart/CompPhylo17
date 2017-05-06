@@ -2,7 +2,7 @@
 ### Pam Hart RevBayes Tree GTR+I+G Assignment
 
 ### Read in sequence data for the gene
-data = readDiscreteCharacterData("Desktop/Tsub_ND2_Alignment.nex")
+data = readDiscreteCharacterData("Desktop/Percopsiformes_nd2.nex")
 
 # Identify useful variables
 n_species <- data.ntaxa()
@@ -48,7 +48,7 @@ moves[++mvi] = mvBetaProbability(p_inv, weight=2.0)
 
 ### Tree model 
 
-out_group = clade("Ahoos")
+out_group = clade("AsayC")
 # Prior distribution on the tree topology	
 topology ~ dnUniformTopology(taxa, outgroup=out_group)
 moves[++mvi] = mvNNI(topology, weight=5.0)
@@ -78,20 +78,20 @@ mymodel = model(psi)
 
 # add monitors
 monitors[++mni] = mnScreen(alpha, p_inv, TL, printgen=1000)
-monitors[++mni] = mnFile(psi, filename="Desktop/tsub_nd2.trees", printgen=10)
-monitors[++mni] = mnModel(filename="Desktop/tsub_nd2.log",printgen=10)
+monitors[++mni] = mnFile(psi, filename="Desktop/percopsiformes_nd2.trees", printgen=10)
+monitors[++mni] = mnModel(filename="Desktop/percopsiformes_nd2.log",printgen=10)
 
 # run the analysis
 mymcmc = mcmc(mymodel, moves, monitors, nruns=2)
 mymcmc.burnin(100000,200)
-mymcmc.run(1000000)
+mymcmc.run(500000)
 
 
 # summarize output
-treetrace = readTreeTrace("Desktop/tsub_nd2.trees")
+treetrace = readTreeTrace("Desktop/percopsiformes_nd2.trees")
 treetrace.summarize()
 
-map_tree = mapTree(treetrace,"Desktop/tsub_nd2.trees")
+map_tree = mapTree(treetrace,"Desktop/percopsiformes_nd2.trees")
 
 
 # you may want to quit RevBayes now
