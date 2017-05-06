@@ -8,16 +8,16 @@ I inferred phylogenetic relationships within the order Percopsiformes utilizing 
 #### Results ####
 Bayesian phylogenies generated from both replicate runs in RevBayes were concordant (Fig. 1 and 2). Values for convergence and mixing were also consistent for both replicate runs (Fig. 3 and 4). 
 
-![image](RevBayes_run1_nd2.pdf)
+![example image](RevBayes_nd2_run1.pdf)
 Figure 1. Bayesian nd2 phylogeny for the Percopsiformes replicate run one.
 
-![image](RevBayes_run2_nd2.pdf)
+![example image](RevBayes_run2_nd2.pdf)
 Figure 2. Bayesian nd2 phylogeny for the Percopsiformes replicate run two.
 
-![image](RevBayes_tracer_table.pdf)
+![example image](RevBayes_tracer_table.pdf.png)
 Figure 3. Convergence and mixing quantification values of the replicate RevBayes runs.
 
-![image](RevBayes_tracer_convergence.pdf)
+![example image](RevBayes_tracer_convergence.pdf.png)
 Figure 4. Convergence visualization plot for replicate RevBayes runs.
 
 #### References ####
