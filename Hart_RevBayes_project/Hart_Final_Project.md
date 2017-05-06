@@ -18,7 +18,7 @@ Figure 2. Bayesian nd2 phylogeny for the Percopsiformes replicate run two.
 Figure 3. Convergence and mixing quantification values of the replicate RevBayes runs.
 
 ![example image](RevBayes_tracer_convergence.pdf.png)
-Figure 4. Convergence visualization plot for replicate RevBayes runs.
+Figure 4. Marginal probability distribution for replicate RevBayes runs.
 
 #### References ####
 Höhna, M.J. Landis, T.A. Heath, B. Boussau, N. Lartillot, B.R. Moore, J.P. Huelsenbeck, F. Ronquist (2016). RevBayes: Bayesian Phylogenetic Inference Using Graphical Models and an Interactive Model-Specification Language. Systematic Biology 65 (4): 726-736.
