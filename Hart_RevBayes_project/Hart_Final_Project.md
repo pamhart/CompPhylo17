@@ -1,4 +1,4 @@
-### RevBayes GTR+I+G model phylogenetic hypothesis for *Typhlichthys subterraneus* ###
+### RevBayes GTR+I+G model phylogenetic hypothesis for order Percopsiformes ###
 #### Pamela Hart ####
 ##### Computational Phylogenetics Spring 2017 Final Assignment #####
 
